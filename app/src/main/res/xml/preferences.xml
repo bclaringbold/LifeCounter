@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory
+        android:title="@string/app_name" />
+
+        <CheckBoxPreference
+            android:key="cmddamageenabled"
+            android:title="Commander"
+            android:summary="Enable the commander damage section"
+            android:defaultValue="false" />
+
+
+    <PreferenceCategory
+        android:title="Player Information"/>
+
+        <EditTextPreference
+            android:key="playername"
+            android:title="Your Name"
+            android:summary="Enter Your name here"
+            android:dialogTitle="Enter Your name here"/>
+
+        <EditTextPreference
+            android:key="opponentname"
+            android:title="Opponent's Name"
+            android:summary="Enter your oppoenents name here"
+            android:dialogTitle="Enter your oppoenents name here"/>
+
+
+</PreferenceScreen>

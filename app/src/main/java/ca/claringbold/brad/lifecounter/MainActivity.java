@@ -1,6 +1,7 @@
 package ca.claringbold.brad.lifecounter;
 
 import android.os.Bundle;
+import android.preference.PreferenceFragment;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -28,6 +29,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
 
         buttonhealthplus_you = (Button) findViewById(R.id.buttonhealthplus_you);
         buttonhealthminus_you = (Button) findViewById(R.id.buttonhealthminus_you);
@@ -117,6 +119,16 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
         return true;
     }
 
+    public static class MainSettingsFragment extends PreferenceFragment {
+
+        public void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            addPreferencesFromResource(R.xml.preferences);
+
+        }
+
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -126,7 +138,10 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            return true;
+            //return true;
+            getFragmentManager().beginTransaction()
+                    .replace(android.R.id.content,
+                            new MainSettingsFragment()).commit();
         }
 
         return super.onOptionsItemSelected(item);
