@@ -1,6 +1,14 @@
 package ca.claringbold.brad.lifecounter;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.widget.Toast;
+import android.preference.PreferenceActivity;
+import android.preference.PreferenceManager;
+import android.content.Intent;
+import android.app.Activity;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.preference.PreferenceFragment;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -15,6 +23,8 @@ import android.view.View.OnClickListener;
 
 public class MainActivity extends AppCompatActivity implements OnClickListener{
 
+    private static final int RESULT_SETTINGS = 1;
+
     Button buttonhealthplus_you, buttonhealthminus_you, buttoncmddamageplus_you, buttoncmddamageminus_you;
     Button buttonhealthplus_opponent, buttonhealthminus_opponent, buttoncmddamageplus_opponent, buttoncmddamageminus_opponent;
 
@@ -27,9 +37,9 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
 
         buttonhealthplus_you = (Button) findViewById(R.id.buttonhealthplus_you);
         buttonhealthminus_you = (Button) findViewById(R.id.buttonhealthminus_you);
@@ -74,8 +84,12 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
             }
         });
 
+
         fab.setVisibility(View.GONE);
+
     }
+
+
 
 
     public void onClick(View v) {
@@ -112,14 +126,11 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
         cmddamage_opponent.setText(String.valueOf(cmddamageopponent));
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
 
-    public static class MainSettingsFragment extends PreferenceFragment {
+
+
+
+    public static class MainSettingsFragment extends PreferenceFragment  {
 
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
@@ -129,21 +140,32 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
 
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            //return true;
-            getFragmentManager().beginTransaction()
-                    .replace(android.R.id.content,
-                            new MainSettingsFragment()).commit();
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+
+            case R.id.action_settings:
+
+                Toast.makeText(this, "Settings selected", Toast.LENGTH_SHORT)
+                        .show();
+
+
+              getFragmentManager().beginTransaction()
+                      .replace(android.R.id.content,
+                               new MainSettingsFragment()).commit();
+                break;
+                default:
+        break;
         }
 
-        return super.onOptionsItemSelected(item);
+
+        return true;
     }
 }
