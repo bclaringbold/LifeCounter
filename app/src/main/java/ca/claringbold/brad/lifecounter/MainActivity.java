@@ -20,6 +20,7 @@ public class MainActivity extends ActionBarActivity implements OnClickListener{
 
     Integer healthyou, cmddamageyou, healthopponent, cmddamageopponent;
 
+    TextView label_you, label_opponent;
     TextView health_you, cmddamage_you;
     TextView health_opponent, cmddamage_opponent;
     TextView commanderdamage_label, commanderdamage_label2;
@@ -35,6 +36,7 @@ public class MainActivity extends ActionBarActivity implements OnClickListener{
         buttonhealthplus_you = (Button) findViewById(R.id.buttonhealthplus_you);        buttonhealthminus_you = (Button) findViewById(R.id.buttonhealthminus_you);
         buttoncmddamageplus_you = (Button) findViewById(R.id.buttoncmddamageplus_you);        buttoncmddamageminus_you = (Button) findViewById(R.id.buttoncmddamageminus_you);
         health_you = (TextView) findViewById(R.id.health_you);        cmddamage_you = (TextView) findViewById(R.id.cmddamage_you);
+        label_you = (TextView) findViewById(R.id.label_you); label_opponent= (TextView) findViewById(R.id.label_opponent);
 
         buttonhealthplus_opponent = (Button) findViewById(R.id.buttonhealthplus_oppoenent);        buttonhealthminus_opponent = (Button) findViewById(R.id.buttonhealthminus_oppoenent);
         buttoncmddamageplus_opponent = (Button) findViewById(R.id.buttoncmddamageplus_oppoenent);        buttoncmddamageminus_opponent = (Button) findViewById(R.id.buttoncmddamageminus_oppoenent);
@@ -49,14 +51,20 @@ public class MainActivity extends ActionBarActivity implements OnClickListener{
         buttonhealthplus_opponent.setOnClickListener(this);        buttonhealthminus_opponent.setOnClickListener(this);
         buttoncmddamageplus_opponent.setOnClickListener(this);        buttoncmddamageminus_opponent.setOnClickListener(this);
 
-        //healthyou = 20;        healthopponent = 20;
         cmddamageyou = 0;        cmddamageopponent = 0;
+
+        String healthyouTemp = preferences.getString("startingplayerhealth", "DEFAULT");
+        healthyou = Integer.parseInt(healthyouTemp);
+
+        String healthopTemp = preferences.getString("startingopponenthealth", "DEFAULT");
+        healthopponent = Integer.parseInt(healthopTemp);
+
+        label_you.setText(String.valueOf(preferences.getString("playername", "DEFAULT"))+"'s Health");
+        label_opponent.setText(String.valueOf(preferences.getString("opponentname", "DEFAULT"))+"'s Health");
 
         health_you.setText(String.valueOf(healthyou));        health_opponent.setText(String.valueOf(healthopponent));
         cmddamage_you.setText(String.valueOf(cmddamageyou));        cmddamage_opponent.setText(String.valueOf(cmddamageopponent));
 
-        healthyou = getPreferences().getString("startingplayerhealth");
-        healthopponent = getSharedPreferences("startingopponenthealth");
 
          if(preferences.getBoolean("cmddamageenabled", false)) {
              buttoncmddamageplus_you.setVisibility(View.VISIBLE);
