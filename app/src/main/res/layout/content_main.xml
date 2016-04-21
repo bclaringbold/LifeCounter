@@ -13,10 +13,6 @@
     tools:showIn="@layout/activity_main"
     tools:context="ca.claringbold.brad.lifecounter.MainActivity">
 
-    <TextView
-        android:id="@+id/section_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
 
     <Button
         style="?android:attr/buttonStyleSmall"
@@ -25,7 +21,8 @@
         android:text="+"
         android:id="@+id/buttonhealthplus_you"
         android:layout_alignBottom="@+id/health_you"
-        android:layout_alignStart="@+id/buttonhealthplus_oppoenent" />
+        android:layout_alignStart="@+id/buttonhealthplus_oppoenent"
+        android:visibility="visible" />
 
     <Button
         style="?android:attr/buttonStyleSmall"
@@ -34,7 +31,8 @@
         android:text="-"
         android:id="@+id/buttonhealthminus_you"
         android:layout_alignBottom="@+id/health_you"
-        android:layout_toEndOf="@+id/label_opponent" />
+        android:layout_toEndOf="@+id/label_opponent"
+        android:visibility="visible" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -44,7 +42,8 @@
         android:id="@+id/health_you"
         android:textSize="50dp"
         android:layout_below="@+id/label_you"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:visibility="visible" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -52,8 +51,8 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Your Health"
         android:id="@+id/label_you"
-        android:layout_below="@+id/section_label"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:visibility="visible" />
 
     <Button
         style="?android:attr/buttonStyleSmall"
@@ -63,7 +62,8 @@
         android:id="@+id/buttonhealthplus_oppoenent"
         android:layout_gravity="left|right"
         android:layout_alignBottom="@+id/health_opponent"
-        android:layout_toStartOf="@+id/label_opponent" />
+        android:layout_toStartOf="@+id/label_opponent"
+        android:visibility="visible" />
 
     <Button
         style="?android:attr/buttonStyleSmall"
@@ -72,7 +72,8 @@
         android:text="-"
         android:id="@+id/buttonhealthminus_oppoenent"
         android:layout_alignBottom="@+id/health_opponent"
-        android:layout_toEndOf="@+id/label_opponent" />
+        android:layout_toEndOf="@+id/label_opponent"
+        android:visibility="visible" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -82,7 +83,8 @@
         android:id="@+id/health_opponent"
         android:textSize="50dp"
         android:layout_below="@+id/label_opponent"
-        android:layout_alignStart="@+id/health_you" />
+        android:layout_alignStart="@+id/health_you"
+        android:visibility="visible" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -91,7 +93,8 @@
         android:text="Opponent&apos;s Health"
         android:id="@+id/label_opponent"
         android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:visibility="visible" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -100,7 +103,8 @@
         android:text="Commander Damage"
         android:id="@+id/commanderdamage_label"
         android:layout_below="@+id/buttonhealthplus_you"
-        android:layout_toEndOf="@+id/buttonhealthplus_you" />
+        android:layout_toEndOf="@+id/buttonhealthplus_you"
+        android:visibility="visible" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -110,7 +114,8 @@
         android:id="@+id/commanderdamage_label2"
         android:layout_below="@+id/buttonhealthplus_oppoenent"
         android:layout_toStartOf="@+id/label_you"
-        android:layout_alignEnd="@+id/commanderdamage_label" />
+        android:layout_alignEnd="@+id/commanderdamage_label"
+        android:visibility="visible" />
 
     <Button
         style="?android:attr/buttonStyleSmall"
@@ -119,7 +124,8 @@
         android:text="+"
         android:id="@+id/buttoncmddamageplus_you"
         android:layout_alignTop="@+id/buttoncmddamageminus_you"
-        android:layout_alignStart="@+id/buttonhealthplus_you" />
+        android:layout_alignStart="@+id/buttonhealthplus_you"
+        android:visibility="visible" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -129,7 +135,8 @@
         android:id="@+id/cmddamage_you"
         android:textSize="40dp"
         android:layout_alignTop="@+id/buttoncmddamageplus_you"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:visibility="visible" />
 
     <Button
         style="?android:attr/buttonStyleSmall"
@@ -138,7 +145,8 @@
         android:text="-"
         android:id="@+id/buttoncmddamageminus_you"
         android:layout_below="@+id/commanderdamage_label"
-        android:layout_alignStart="@+id/buttonhealthminus_you" />
+        android:layout_alignStart="@+id/buttonhealthminus_you"
+        android:visibility="visible" />
 
     <Button
         style="?android:attr/buttonStyleSmall"
@@ -147,7 +155,8 @@
         android:text="+"
         android:id="@+id/buttoncmddamageplus_oppoenent"
         android:layout_below="@+id/commanderdamage_label2"
-        android:layout_alignStart="@+id/buttonhealthplus_oppoenent" />
+        android:layout_alignStart="@+id/buttonhealthplus_oppoenent"
+        android:visibility="visible" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -157,7 +166,8 @@
         android:id="@+id/cmddamage_opponent"
         android:textSize="40dp"
         android:layout_alignTop="@+id/buttoncmddamageplus_oppoenent"
-        android:layout_alignStart="@+id/cmddamage_you" />
+        android:layout_alignStart="@+id/cmddamage_you"
+        android:visibility="visible" />
 
     <Button
         style="?android:attr/buttonStyleSmall"
@@ -166,6 +176,7 @@
         android:text="-"
         android:id="@+id/buttoncmddamageminus_oppoenent"
         android:layout_below="@+id/commanderdamage_label2"
-        android:layout_alignStart="@+id/buttonhealthminus_oppoenent" />
+        android:layout_alignStart="@+id/buttonhealthminus_oppoenent"
+        android:visibility="visible" />
 
 </RelativeLayout>

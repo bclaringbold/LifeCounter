@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <PreferenceCategory
         android:title="@string/app_name" />
@@ -8,7 +9,7 @@
             android:key="cmddamageenabled"
             android:title="Commander"
             android:summary="Enable the commander damage section"
-            android:defaultValue="false" />
+            android:defaultValue="true" />
 
 
     <PreferenceCategory
@@ -26,5 +27,19 @@
             android:summary="Enter your oppoenents name here"
             android:dialogTitle="Enter your oppoenents name here"/>
 
+    <PreferenceCategory
+        android:title="Starting Health Information"/>
+
+    <EditTextPreference
+        android:key="startingplayerhealth"
+        android:title="Your Starting Health"
+        android:summary="Enter Your Starting Health Here"
+        android:dialogTitle="Enter Your Starting Health Here"/>
+
+    <EditTextPreference
+        android:key="startingopponenthealth"
+        android:title="Your Opponent's Starting Health"
+        android:summary="Enter Your Opponent's Starting Health Here"
+        android:dialogTitle="Enter Your Opponent's Starting Health Here"/>
 
 </PreferenceScreen>

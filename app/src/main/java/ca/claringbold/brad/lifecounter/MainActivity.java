@@ -1,19 +1,10 @@
 package ca.claringbold.brad.lifecounter;
 
-import android.content.SharedPreferences;
-import android.os.Bundle;
-import android.widget.Toast;
-import android.preference.PreferenceActivity;
+import android.support.v7.app.ActionBarActivity;
 import android.preference.PreferenceManager;
 import android.content.Intent;
-import android.app.Activity;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
-import android.preference.PreferenceFragment;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -21,9 +12,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.view.View.OnClickListener;
 
-public class MainActivity extends AppCompatActivity implements OnClickListener{
 
-    private static final int RESULT_SETTINGS = 1;
+public class MainActivity extends ActionBarActivity implements OnClickListener{
 
     Button buttonhealthplus_you, buttonhealthminus_you, buttoncmddamageplus_you, buttoncmddamageminus_you;
     Button buttonhealthplus_opponent, buttonhealthminus_opponent, buttoncmddamageplus_opponent, buttoncmddamageminus_opponent;
@@ -32,66 +22,64 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
 
     TextView health_you, cmddamage_you;
     TextView health_opponent, cmddamage_opponent;
+    TextView commanderdamage_label, commanderdamage_label2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        // get shared preferences
+        final SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
 
-        buttonhealthplus_you = (Button) findViewById(R.id.buttonhealthplus_you);
-        buttonhealthminus_you = (Button) findViewById(R.id.buttonhealthminus_you);
-        buttoncmddamageplus_you = (Button) findViewById(R.id.buttoncmddamageplus_you);
-        buttoncmddamageminus_you = (Button) findViewById(R.id.buttoncmddamageminus_you);
-        health_you = (TextView) findViewById(R.id.health_you);
-        cmddamage_you = (TextView) findViewById(R.id.cmddamage_you);
+        buttonhealthplus_you = (Button) findViewById(R.id.buttonhealthplus_you);        buttonhealthminus_you = (Button) findViewById(R.id.buttonhealthminus_you);
+        buttoncmddamageplus_you = (Button) findViewById(R.id.buttoncmddamageplus_you);        buttoncmddamageminus_you = (Button) findViewById(R.id.buttoncmddamageminus_you);
+        health_you = (TextView) findViewById(R.id.health_you);        cmddamage_you = (TextView) findViewById(R.id.cmddamage_you);
 
-        buttonhealthplus_opponent = (Button) findViewById(R.id.buttonhealthplus_oppoenent);
-        buttonhealthminus_opponent = (Button) findViewById(R.id.buttonhealthminus_oppoenent);
-        buttoncmddamageplus_opponent = (Button) findViewById(R.id.buttoncmddamageplus_oppoenent);
-        buttoncmddamageminus_opponent = (Button) findViewById(R.id.buttoncmddamageminus_oppoenent);
-        health_opponent = (TextView) findViewById(R.id.health_opponent);
-        cmddamage_opponent = (TextView) findViewById(R.id.cmddamage_opponent);
+        buttonhealthplus_opponent = (Button) findViewById(R.id.buttonhealthplus_oppoenent);        buttonhealthminus_opponent = (Button) findViewById(R.id.buttonhealthminus_oppoenent);
+        buttoncmddamageplus_opponent = (Button) findViewById(R.id.buttoncmddamageplus_oppoenent);        buttoncmddamageminus_opponent = (Button) findViewById(R.id.buttoncmddamageminus_oppoenent);
+        health_opponent = (TextView) findViewById(R.id.health_opponent);        cmddamage_opponent = (TextView) findViewById(R.id.cmddamage_opponent);
 
-        buttonhealthplus_you.setOnClickListener(this);
-        buttonhealthminus_you.setOnClickListener(this);
-        buttoncmddamageplus_you.setOnClickListener(this);
-        buttoncmddamageminus_you.setOnClickListener(this);
+        commanderdamage_label = (TextView) findViewById(R.id.commanderdamage_label);
+        commanderdamage_label2 = (TextView) findViewById(R.id.commanderdamage_label2);
 
-        buttonhealthplus_opponent.setOnClickListener(this);
-        buttonhealthminus_opponent.setOnClickListener(this);
-        buttoncmddamageplus_opponent.setOnClickListener(this);
-        buttoncmddamageminus_opponent.setOnClickListener(this);
+        buttonhealthplus_you.setOnClickListener(this);        buttonhealthminus_you.setOnClickListener(this);
+        buttoncmddamageplus_you.setOnClickListener(this);        buttoncmddamageminus_you.setOnClickListener(this);
 
+        buttonhealthplus_opponent.setOnClickListener(this);        buttonhealthminus_opponent.setOnClickListener(this);
+        buttoncmddamageplus_opponent.setOnClickListener(this);        buttoncmddamageminus_opponent.setOnClickListener(this);
 
-        healthyou = 20;
-        healthopponent = 20;
-        cmddamageyou = 0;
-        cmddamageopponent = 0;
-        health_you.setText(String.valueOf(healthyou));
-        health_opponent.setText(String.valueOf(healthopponent));
-        cmddamage_you.setText(String.valueOf(cmddamageyou));
-        cmddamage_opponent.setText(String.valueOf(cmddamageopponent));
+        //healthyou = 20;        healthopponent = 20;
+        cmddamageyou = 0;        cmddamageopponent = 0;
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        health_you.setText(String.valueOf(healthyou));        health_opponent.setText(String.valueOf(healthopponent));
+        cmddamage_you.setText(String.valueOf(cmddamageyou));        cmddamage_opponent.setText(String.valueOf(cmddamageopponent));
 
+        healthyou = getPreferences().getString("startingplayerhealth");
+        healthopponent = getSharedPreferences("startingopponenthealth");
 
-        fab.setVisibility(View.GONE);
-
+         if(preferences.getBoolean("cmddamageenabled", false)) {
+             buttoncmddamageplus_you.setVisibility(View.VISIBLE);
+             buttoncmddamageminus_you.setVisibility(View.VISIBLE);
+             buttoncmddamageplus_opponent.setVisibility(View.VISIBLE);
+             buttoncmddamageminus_opponent.setVisibility(View.VISIBLE);
+             cmddamage_you.setVisibility(View.VISIBLE);
+             cmddamage_opponent.setVisibility(View.VISIBLE);
+             commanderdamage_label.setVisibility(View.VISIBLE);
+             commanderdamage_label2.setVisibility(View.VISIBLE);
+        } else {
+             buttoncmddamageplus_you.setVisibility(View.INVISIBLE);
+             buttoncmddamageminus_you.setVisibility(View.INVISIBLE);
+             buttoncmddamageplus_opponent.setVisibility(View.INVISIBLE);
+             buttoncmddamageminus_opponent.setVisibility(View.INVISIBLE);
+             cmddamage_you.setVisibility(View.INVISIBLE);
+             cmddamage_opponent.setVisibility(View.INVISIBLE);
+             commanderdamage_label.setVisibility(View.INVISIBLE);
+             commanderdamage_label2.setVisibility(View.INVISIBLE);
+        }
     }
 
-
-
-
+    //Checks to see what button is pressed and changes the value
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.buttonhealthplus_you:
@@ -106,7 +94,6 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
             case R.id.buttonhealthminus_oppoenent:
                 healthopponent--;
                 break;
-
             case R.id.buttoncmddamageplus_you:
                 cmddamageyou++;
                 break;
@@ -120,26 +107,39 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
                 cmddamageopponent--;
                 break;
         }
-        health_you.setText(String.valueOf(healthyou));
-        health_opponent.setText(String.valueOf(healthopponent));
-        cmddamage_you.setText(String.valueOf(cmddamageyou));
-        cmddamage_opponent.setText(String.valueOf(cmddamageopponent));
+        //updates the value on the screen
+        health_you.setText(String.valueOf(healthyou));        health_opponent.setText(String.valueOf(healthopponent));
+        cmddamage_you.setText(String.valueOf(cmddamageyou));        cmddamage_opponent.setText(String.valueOf(cmddamageopponent));
     }
 
+    // app is already running and gets a new intent (for example you changed preferences and want to return to MainActivity)
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
 
+        // get shared preferences
+        final SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
 
-
-
-    public static class MainSettingsFragment extends PreferenceFragment  {
-
-        public void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-            addPreferencesFromResource(R.xml.preferences);
-
+        if(preferences.getBoolean("cmddamageenabled", false)) {
+            buttoncmddamageplus_you.setVisibility(View.VISIBLE);
+            buttoncmddamageminus_you.setVisibility(View.VISIBLE);
+            buttoncmddamageplus_opponent.setVisibility(View.VISIBLE);
+            buttoncmddamageminus_opponent.setVisibility(View.VISIBLE);
+            cmddamage_you.setVisibility(View.VISIBLE);
+            cmddamage_opponent.setVisibility(View.VISIBLE);
+            commanderdamage_label.setVisibility(View.VISIBLE);
+            commanderdamage_label2.setVisibility(View.VISIBLE);
+        } else {
+            buttoncmddamageplus_you.setVisibility(View.INVISIBLE);
+            buttoncmddamageminus_you.setVisibility(View.INVISIBLE);
+            buttoncmddamageplus_opponent.setVisibility(View.INVISIBLE);
+            buttoncmddamageminus_opponent.setVisibility(View.INVISIBLE);
+            cmddamage_you.setVisibility(View.INVISIBLE);
+            cmddamage_opponent.setVisibility(View.INVISIBLE);
+            commanderdamage_label.setVisibility(View.INVISIBLE);
+            commanderdamage_label2.setVisibility(View.INVISIBLE);
         }
-
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -149,23 +149,17 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
     }
 
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
+        // Handle action bar item clicks here
+        int id = item.getItemId();
 
-            case R.id.action_settings:
-
-                Toast.makeText(this, "Settings selected", Toast.LENGTH_SHORT)
-                        .show();
-
-
-              getFragmentManager().beginTransaction()
-                      .replace(android.R.id.content,
-                               new MainSettingsFragment()).commit();
-                break;
-                default:
-        break;
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            Intent settings = new Intent(this, MainSettingsActivity.class);
+            startActivity(settings);
+            return true;
         }
 
-
-        return true;
+        return super.onOptionsItemSelected(item);
     }
+
 }
