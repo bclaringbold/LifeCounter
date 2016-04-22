@@ -53,14 +53,14 @@ public class MainActivity extends ActionBarActivity implements OnClickListener{
 
         cmddamageyou = 0;        cmddamageopponent = 0;
 
-        String healthyouTemp = preferences.getString("startingplayerhealth", "DEFAULT");
+        String healthyouTemp = preferences.getString("startingplayerhealth", "20");
         healthyou = Integer.parseInt(healthyouTemp);
 
-        String healthopTemp = preferences.getString("startingopponenthealth", "DEFAULT");
+        String healthopTemp = preferences.getString("startingopponenthealth", "20");
         healthopponent = Integer.parseInt(healthopTemp);
 
-        label_you.setText(String.valueOf(preferences.getString("playername", "DEFAULT"))+"'s Health");
-        label_opponent.setText(String.valueOf(preferences.getString("opponentname", "DEFAULT"))+"'s Health");
+        label_you.setText(String.valueOf(preferences.getString("playername", "Player"))+"'s Health");
+        label_opponent.setText(String.valueOf(preferences.getString("opponentname", "Opponent"))+"'s Health");
 
         health_you.setText(String.valueOf(healthyou));        health_opponent.setText(String.valueOf(healthopponent));
         cmddamage_you.setText(String.valueOf(cmddamageyou));        cmddamage_opponent.setText(String.valueOf(cmddamageopponent));

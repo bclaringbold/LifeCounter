@@ -9,7 +9,7 @@
             android:key="cmddamageenabled"
             android:title="Commander"
             android:summary="Enable the commander damage section"
-            android:defaultValue="true" />
+            android:defaultValue="false" />
 
 
     <PreferenceCategory
